@@ -44,4 +44,6 @@
     const unsigned int OPCODE_LENGTH =4;
     const unsigned int INSTRUCTION_LENGTH=16;
     const unsigned int I_T_IMM_LENGTH = 8;
+    const unsigned int B_T_IMM_LENGTH = 6;
+    const unsigned int B_T_FUNCT_LENGTH = 6;
 #endif

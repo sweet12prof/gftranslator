@@ -20,7 +20,7 @@
             void setImmediate(const int &);
 
         //Virtual Function to return binary representation
-            virtual const std::string & printInstruction() const;
+            virtual std::string  printInstruction() const;
 
         //cUSTOM Function to call set memberFunctions
             void setInstruction (const int &, const int &);

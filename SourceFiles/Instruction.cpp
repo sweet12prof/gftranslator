@@ -22,7 +22,7 @@ const int & Instruction::getOpCode() const{
 //-----Access and Mutators for InstrType
 void Instruction::setType(const int & instrType){
     if((0 < instrType) && (5> instrType))
-        this->type = static_cast<instrTypes>(instrType);
+        this->type = (instrTypes) (instrType);
 }
 
 const instrTypes & Instruction::getType() const {
@@ -42,6 +42,6 @@ void Instruction::setInstruction(const std::string & opcode, const int & lineNum
     }
 }
 
-const std::string & Instruction::printInstruction() const{
+std::string  Instruction::printInstruction() const{
     return std::bitset<::OPCODE_LENGTH>(Instruction::getOpCode()).to_string();
 } 

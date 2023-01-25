@@ -23,11 +23,11 @@ void Iinstr::setRa(const int & Ra){
 }
 
 void Iinstr::setImmediate(const int & immediate){
-    if((0 < immediate) && (16 > immediate))
+    if((0 < immediate) && (256 > immediate))
         this->Immediate = immediate;
     else {
         std::cout << "Syntax Error"; 
-        throw std::invalid_argument("Source Operand cannot be greater/lesser than 16/0");
+        throw std::invalid_argument("Source Operand cannot be greater/lesser than 0/256");
     }
 }
 
@@ -42,11 +42,10 @@ const int & Iinstr::getImmediate() const{
 }
 
 //virtual Func Override 
-
-const std::string & Iinstr::printInstruction() const {
+std::string  Iinstr::printInstruction() const {
     std::stringstream output;
 
-    output  << Instruction::printInstruction 
+    output  << Instruction::printInstruction()
             << std::bitset<::OPCODE_LENGTH>(this->Ra).to_string()
             << std::bitset<::I_T_IMM_LENGTH>(this->Immediate).to_string();
     return output.str();

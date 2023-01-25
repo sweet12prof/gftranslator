@@ -1,10 +1,10 @@
-#include <iostream>
 #include <string>
 #include <iomanip>
 #include <sstream>
 #include <bitset> 
-#include <Const.hpp>
+#include "./Const.hpp"
 #include <stdexcept>
+#include <iostream>
 
 #ifndef INSTRUCTION_HPP
 #define INSTRUCTION_HPP
@@ -16,7 +16,7 @@ private:
     instrTypes type;
 
 public:
-    Instruction() = default;
+    //Instruction() = default;
     Instruction( const std::string &, const int &);
     virtual ~Instruction() = default;
 
@@ -33,7 +33,7 @@ public:
     
     //-----Virtual Func to return machine 
     //---- representation of object - prints only opcode from base calss
-    virtual const std::string & printInstruction() const; 
+    virtual std::string   printInstruction() const; 
 };
 
 
