@@ -1,4 +1,4 @@
-#include "../HeaderFiles/Rinstr.hpp"
+#include "../HeaderFiles/rInstr.hpp"
 
 Rinstr::Rinstr(const std::string & opcode, const int & lineNum , const int & Ra, const int & Rb, const int & funct)
     :Instruction::Instruction(opcode, lineNum)

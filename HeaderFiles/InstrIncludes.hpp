@@ -1,0 +1,5 @@
+#include "./rInstr.hpp"
+#include "./Iinstr.hpp"
+#include "./Minstr.hpp"
+#include "./Jinstr.hpp"
+#include "./Binstr.hpp"
