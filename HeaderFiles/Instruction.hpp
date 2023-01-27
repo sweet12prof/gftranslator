@@ -25,11 +25,11 @@ public:
 
     //---access and muttators for Opcode 
     void setOpCode(const int &);
-    const int & getOpCode() const;
+    int  getOpCode() const;
 
     //-----access and mutators forinstrTypes
     void setType(const int &);
-    const instrTypes & getType() const;
+    instrTypes  getType() const;
     
     //-----Virtual Func to return machine 
     //---- representation of object - prints only opcode from base calss

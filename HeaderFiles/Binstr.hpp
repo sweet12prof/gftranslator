@@ -6,7 +6,7 @@
     {
         public:
             Binstr() = default;
-            Binstr(const std::string &, const int &, const int &, const int &, const int &);
+            Binstr(const std::string &, const int &, const int &, const int &);
         
         //---accessors
             const int & getRa() const;

@@ -1,8 +1,9 @@
 #include "../HeaderFiles/Jinstr.hpp"
 
-Jinstr::Jinstr(const std::string & opCode, const int & lineNum, const int & immediate, const int & funct)
+Jinstr::Jinstr(const std::string & opCode, const int & lineNum, const int & immediate)
     :Instruction(opCode, lineNum)
 {
+    int funct = instMap.find(opCode)->second.second.second;
     Jinstr::setInstruction(immediate, funct);
 }
 
@@ -12,7 +13,8 @@ void Jinstr::setInstruction(const int & immediate, const int & funct){
 
 //mutators
 Jinstr& Jinstr::setImmediate(const int & immediate){
-      if((0 < immediate) && (256 > immediate))
+   // std::cout << "immediate is " << immediate;
+      if((-129 < immediate) && (128 > immediate))
         this->immediate = immediate;
     else{
             std::cout << "Syntax Error"; 
@@ -22,7 +24,7 @@ Jinstr& Jinstr::setImmediate(const int & immediate){
 }
 
 Jinstr & Jinstr::setFunct(const int & funct){
-     if((0 < funct) && (16 > funct))
+     if((-1 < funct) && (16 > funct))
         this->funct = funct;
      else {
          std::cout << "Syntax Error"; 

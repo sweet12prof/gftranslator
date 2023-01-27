@@ -9,7 +9,7 @@
         
         public:
             Jinstr() = default;
-            Jinstr(const std::string & ,const int &, const int &, const int &);
+            Jinstr(const std::string & ,const int &, const int &);
 
             //accessors 
             const int & getImmediate() const;

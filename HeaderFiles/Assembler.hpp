@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include <stdexcept>
+#include <cstdlib>
 #include "./InstrIncludes.hpp"
 
 #ifndef ASSEMBLER_H
@@ -14,10 +15,17 @@
 class Assembler {
     public: 
         Assembler (const std::string &);
+
         // parse a string removing labels and extra white space
         std::string processString(const std::string &);
-        std::string replaceLabels(const std::string &, const int &);
+        int replaceLabels(const std::string &, const int &);
         std::string translate(const std::string &, const int &);
+        void processInstrucQueue(std::vector<std::string> &);
+
+        //ReadFile
+        std::vector<std::string> readASMFile();
+        void processAsmFile(std::vector<std::string> &); 
+        void Assemble();
         
         std::ofstream output;
         std::ifstream input;
@@ -27,7 +35,9 @@ class Assembler {
     private:
         std::unordered_map<std::string, int> labelRefTable;
         std::streampos  fileByteCount;
+        std::streampos  eof_of_file;
         std::string     fileDir;
+        std::string     outputDir;
         int lineCount;
 };
 

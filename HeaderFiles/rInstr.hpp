@@ -9,7 +9,7 @@ class Rinstr : public Instruction{
     public:
         //Constructor
        // Rinstr() = default;
-        Rinstr(const std::string &, const int&, const int&, const int&, const int&);
+        Rinstr(const std::string &, const int&, const int&, const int&);
         
         //---access and mutators for Ra
         void setRa(const int &);

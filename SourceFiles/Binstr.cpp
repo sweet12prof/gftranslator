@@ -1,8 +1,9 @@
 #include "../HeaderFiles/Binstr.hpp"
 
-Binstr::Binstr(const std::string & opcode, const int & lineNum, const int & Ra, const int & immediate, const int & funct)
+Binstr::Binstr(const std::string & opcode, const int & lineNum, const int & Ra, const int & immediate)
     :Instruction::Instruction(opcode, lineNum)
 {
+    int funct = instMap.find(opcode)->second.second.second;
     Binstr::setInstruction( Ra,  immediate,  funct);
 }
 
@@ -15,7 +16,7 @@ void Binstr::setInstruction(const int & Ra, const int & immediate, const int & f
 
 //mutators
 void Binstr::setRa(const int & Ra){
-       if((0 < Ra) && (16 > Ra))
+       if((-1 < Ra) && (16 > Ra))
             this->Ra = Ra;
        else{
             std::cout << "Syntax Error"; 
@@ -25,7 +26,7 @@ void Binstr::setRa(const int & Ra){
 
 
 void Binstr::setImmediate(const int & immediate){
-       if((0 < immediate && (64 > immediate)))
+       if((-33 < immediate && (32 > immediate)))
             this->Immediate  = immediate;
        else{
             std::cout << "Syntax Error"; 
@@ -35,7 +36,7 @@ void Binstr::setImmediate(const int & immediate){
 
 
 void Binstr::setFunct(const int & funct){
-    if((0 < Ra) && (4 > Ra))
+    if((-1 < Ra) && (4 > Ra))
         this->funct = funct;
     else 
         {

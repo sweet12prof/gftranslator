@@ -4,33 +4,42 @@
 
 #ifndef CONST_HPP
 #define CONST_HPP
-  const std::map < std::string, std::pair<int, int>> instMap{
-        {"and",       {0, 0} }, 
-        {"nop",       {0, 0} },
-        {"or",        {0, 0} }, 
-        {"xor",       {0, 0} }, 
-        {"mul",       {0, 0} }, 
-        {"div",       {0, 0} }, 
-        {"sr",        {0, 0} }, 
-        {"mv",        {0, 0} }, 
-        {"addi",      {1, 1} }, 
-        {"addiu",     {1, 2} }, 
-        {"jr",        {1, 3} },
-        {"dupis",     {1, 4} },
-        {"dupiv",     {1, 5} },
-        {"lbI",       {1, 6} },
-        {"beq",       {2, 7} }, 
-        {"beqdec",    {2, 7} },
-        {"bne",       {2, 7} }, 
-        {"bnedec",    {2, 7} },
-        {"lds",       {3, 8} }, 
-        {"stos",      {3, 9} },
-        {"ldv",       {3, 10}}, 
-        {"stov",      {3, 11}},  
-        {"setfx",     {4, 12}}, 
-        {"setstride", {4, 12}}, 
-        {"setmvtype", {4, 12}}, 
-        {"setsrtype", {4, 12}}
+  const std::map < std::string, std::pair<int, std::pair<int, int>>> instMap{
+        {"ands",       {0, {0, 2}}}, 
+        {"andv",       {0, {0, 3}}},
+        {"nop",        {0, {0, 0}}},
+        {"ors",        {0, {0, 4}}}, 
+        {"orv",        {0, {0, 5}}}, 
+        {"xors",       {0, {0, 6}}}, 
+        {"xorv",       {0, {0, 7}}}, 
+        {"muls",       {0, {0, 8}}}, 
+        {"mulv",       {0, {0, 9}}}, 
+        {"divs",       {0, {0, 10}}}, 
+        {"divv",       {0, {0, 11}}}, 
+        {"srs",        {0, {0, 12}}}, 
+        {"srv",        {0, {0, 13}}}, 
+        {"mvs",        {0, {0, 14}}}, 
+        {"mvv",        {0, {0, 15}}}, 
+        {"addi",       {1, {1, -1}}}, 
+        {"addiu",      {1, {2, -1}}}, 
+        {"jr",         {1, {3, -1}}},
+        {"dupis",      {1, {4, -1}}},
+        {"dupiv",      {1, {5, -1}}},
+        {"lbI",        {1, {6, -1}}},
+        {"beq",        {2, {7, 2} }}, 
+        {"beqdec",     {2, {7, 3} }},
+        {"bne",        {2, {7, 0} }}, 
+        {"bnedec",     {2, {7, 1} }},
+        {"lds",        {3, {8, -1}}}, 
+        {"stos",       {3, {9, -1}}},
+        {"ldv",       {3, {10, -1}}}, 
+        {"stov",      {3, {11, -1}}},  
+        {"setfx",     {4, {12, 0}}}, 
+        {"j",         {4, {12, 2}}},
+        {"jal",       {4, {12, 3}}},
+        {"setstride", {4, {12, 4}}}, 
+        {"setmvtype", {4, {12, 5}}}, 
+        {"setsrtype", {4, {12, 1}}}
     };
 
     enum class instrTypes {
@@ -45,5 +54,5 @@
     const unsigned int INSTRUCTION_LENGTH=16;
     const unsigned int I_T_IMM_LENGTH = 8;
     const unsigned int B_T_IMM_LENGTH = 6;
-    const unsigned int B_T_FUNCT_LENGTH = 6;
+    const unsigned int B_T_FUNCT_LENGTH = 2;
 #endif

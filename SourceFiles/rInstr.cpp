@@ -1,8 +1,9 @@
 #include "../HeaderFiles/rInstr.hpp"
 
-Rinstr::Rinstr(const std::string & opcode, const int & lineNum , const int & Ra, const int & Rb, const int & funct)
+Rinstr::Rinstr(const std::string & opcode, const int & lineNum , const int & Ra, const int & Rb)
     :Instruction::Instruction(opcode, lineNum)
 {
+    int funct = instMap.find(opcode)->second.second.second;
     Rinstr::setInstruction(Ra, Rb, funct);
 }
 
@@ -15,7 +16,7 @@ void Rinstr::setInstruction(const int & Ra, const int & Rb, const int & funct){
 
 //mutators for Ra, Rb and funct 
 void Rinstr::setRa(const int & Ra){
-     if((0 < Ra) && (16 > Ra))
+     if((0 <= Ra) && (16 > Ra))
         this->Ra = Ra;
     else {
         std::cout << "Syntax Error"; 
@@ -24,7 +25,7 @@ void Rinstr::setRa(const int & Ra){
 }
 
 void Rinstr::setRb(const int & Rb){
-     if((0 < Rb) && (16 > Rb))
+     if((0 <= Rb) && (16 > Rb))
         this->Rb = Rb;
     else {
         std::cout << "Syntax Error"; 
@@ -34,7 +35,7 @@ void Rinstr::setRb(const int & Rb){
 
 
 void Rinstr::setFunct(const int & funct){
-     if((0 < funct) && (16 > funct))
+     if((0 <= funct) && (16 > funct))
         this->funct = funct;
     else {
         std::cout << "Syntax Error"; 
