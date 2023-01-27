@@ -1,4 +1,4 @@
-#include "../HeaderFiles/Minstr.hpp"
+#include "./Minstr.hpp"
 
 Minstr::Minstr(const std::string & opocde, const int & lineNum, const int & Ra, const int & Rb, const int & immediate)
     :Instruction::Instruction(opocde, lineNum)

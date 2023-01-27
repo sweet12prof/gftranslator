@@ -1,4 +1,4 @@
-#include "../HeaderFiles/Jinstr.hpp"
+#include "./Jinstr.hpp"
 
 Jinstr::Jinstr(const std::string & opCode, const int & lineNum, const int & immediate)
     :Instruction(opCode, lineNum)

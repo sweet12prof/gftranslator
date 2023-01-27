@@ -1,4 +1,4 @@
-#include "../HeaderFiles/Iinstr.hpp"
+#include "./Iinstr.hpp"
 
 Iinstr::Iinstr(const std::string & opcode, const int lineNum, const int & Ra, const int & Immediate)
     :Instruction::Instruction(opcode, lineNum)

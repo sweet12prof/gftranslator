@@ -29,6 +29,7 @@ class Assembler {
         
         std::ofstream output;
         std::ifstream input;
+        bool          i_streameofbit;
 
         
 

@@ -1,4 +1,4 @@
-#include "../HeaderFiles/Binstr.hpp"
+#include "./Binstr.hpp"
 
 Binstr::Binstr(const std::string & opcode, const int & lineNum, const int & Ra, const int & immediate)
     :Instruction::Instruction(opcode, lineNum)
@@ -36,7 +36,7 @@ void Binstr::setImmediate(const int & immediate){
 
 
 void Binstr::setFunct(const int & funct){
-    if((-1 < Ra) && (4 > Ra))
+    if((-1 < funct) && (4 > funct))
         this->funct = funct;
     else 
         {

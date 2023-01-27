@@ -1,4 +1,4 @@
-#include "../HeaderFiles/Assembler.hpp"
+#include "Assembler.hpp"
 
 Assembler::Assembler(const std::string & filedir)
     :lineCount{0}, fileByteCount{0}, outputDir{"binaries.txt"}, fileDir{filedir}
@@ -9,13 +9,15 @@ Assembler::Assembler(const std::string & filedir)
             std::cerr << "File doesnot exist at specified directory/Is Invalid/noRead Permissions";
             exit(EXIT_FAILURE);
         }
-    Assembler::input.seekg(0, std::ios::end );
-    this->eof_of_file = Assembler::input.tellg();
-     Assembler::input.seekg(0, std::ios::beg );
+    // Assembler::input.seekg(0, std::ios::end );
+    // this->eof_of_file = Assembler::input.tellg();
+    //  Assembler::input.seekg(0, std::ios::beg );
     Assembler::input.close();
 
     Assembler::output.open(this->outputDir);
     Assembler::output.close();
+
+    // std::cout << int(this->eof_of_file) <<  std::endl << int (this->fileByteCount);
 }
 
 std::string Assembler::processString(const std::string & lineIn){
@@ -52,6 +54,9 @@ std::string Assembler::processString(const std::string & lineIn){
                 break;
 
                 case ',' :
+                break;
+
+                case '_':
                 break;
 
 
@@ -186,9 +191,9 @@ std::vector <std::string> Assembler::readASMFile() {
             {
                 instrucQueue.push_back(instrucLine);
                 ++maxLinestoRead;
-                this->fileByteCount = Assembler::input.tellg();
+                //this->fileByteCount = Assembler::input.tellg();
             }
-        
+    this->i_streameofbit =  Assembler::input.eof();    
     input.close();
     return instrucQueue;
 }
@@ -204,8 +209,8 @@ void Assembler::processAsmFile(std::vector<std::string> & queue){
 
 
 void Assembler::Assemble(){
-   //while(this->fileByteCount < this->eof_of_file){
+   while(!this->i_streameofbit){
         std::vector instrucQ = Assembler::readASMFile();
         Assembler::processAsmFile(instrucQ);
- //  }
+   }
 }

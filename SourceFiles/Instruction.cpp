@@ -1,4 +1,4 @@
-#include "../HeaderFiles/Instruction.hpp"
+#include "./InstrIncludes.hpp"
 
 Instruction::Instruction(const std::string & opCode, const int & lineNum ){
    Instruction::setInstruction(opCode, lineNum);
