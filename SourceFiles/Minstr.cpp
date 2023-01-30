@@ -12,7 +12,7 @@ void Minstr::setInstruction(const int & Ra, const int & Rb, const int & immediat
 
 //mutators
 Minstr & Minstr::setRa(const int & Ra){
-     if((0 < Ra) && (16 > Ra))
+     if((-1 < Ra) && (16 > Ra))
         this->Ra = Ra;
     else {
         std::cout << "Syntax Error"; 
@@ -22,7 +22,7 @@ Minstr & Minstr::setRa(const int & Ra){
 }
 
 Minstr & Minstr::setRb(const int & Rb){
-     if((0 < Rb) && (16 > Rb))
+     if((-1 < Rb) && (16 > Rb))
         this->Rb = Rb;
     else {
         std::cout << "Syntax Error"; 
@@ -33,7 +33,7 @@ Minstr & Minstr::setRb(const int & Rb){
 
 
 Minstr & Minstr::setImmediate(const int & immediate){
-     if((0 < immediate ) && (16 > immediate))
+     if((0 <= immediate ) && (16 > immediate))
         this->Immediate = immediate;
     else {
         std::cout << "Syntax Error"; 

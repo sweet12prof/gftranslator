@@ -28,6 +28,11 @@ std::string Assembler::processString(const std::string & lineIn){
         {
             switch(item){
                 case ':' :
+                        std::transform(token.begin(), token.end(), token.begin(), 
+                        [](unsigned char c) {
+                            return ::tolower(c);
+                        });
+
                     this->labelRefTable.insert(std::make_pair(token, this->lineCount));
                     token = "";
                 break;
@@ -63,7 +68,7 @@ std::string Assembler::processString(const std::string & lineIn){
                 default: {
                         token += item; 
                         if(i == lineIn.size() - 1)
-                            output << token;
+                            output << token;    
                 }
 
             }
@@ -82,9 +87,16 @@ std::string Assembler::processString(const std::string & lineIn){
    // std::cout << "Output of process string is " << output.str() << std::endl; 
     return output.str();
 }
+  
 
+int Assembler::replaceLabels(const std::string& label_, const int & lineNum){
 
-int Assembler::replaceLabels(const std::string& label, const int & lineNum){
+    std::string label{label_};
+
+    std::transform(label.begin(), label.end(), label.begin(), 
+                        [](unsigned char c) {
+                            return ::tolower(c);
+                        });
     if(auto p = this->labelRefTable.find(label); p == this->labelRefTable.end())
         {
             std::cout << "Undefined label:  " << label << "at line: " << lineNum << std::endl;
@@ -164,7 +176,7 @@ std::string Assembler::translate(const std::string & instr, const int & LineNum)
 
 
 void Assembler::processInstrucQueue(std::vector<std::string> & Queue){
-    int i{0};
+    int i{1};
 
     for (auto & p : Queue)
             p = Assembler::processString(p);
@@ -182,18 +194,19 @@ std::vector <std::string> Assembler::readASMFile() {
 
     Assembler::input.open(this->fileDir);
     Assembler::input.seekg(this->fileByteCount);
-    
     int maxLinestoRead{0};
-   while (std::getline(Assembler::input, instrucLine) &&  maxLinestoRead < 20)
-       // std::getline(Assembler::input, instrucLine);
-       // std::cout <<"here" << this->fileDir << std::endl;
-        if(instrucLine != "")
-            {
-                instrucQueue.push_back(instrucLine);
-                ++maxLinestoRead;
-                //this->fileByteCount = Assembler::input.tellg();
-            }
-    this->i_streameofbit =  Assembler::input.eof();    
+   
+   while (maxLinestoRead < 20 &&  std::getline(Assembler::input, instrucLine))
+     {  
+      
+       this->i_streameofbit =  Assembler::input.eof();
+            if(instrucLine != "")
+                {
+                    instrucQueue.push_back(instrucLine);
+                    ++maxLinestoRead; 
+                }
+    }
+    this->fileByteCount = Assembler::input.tellg();
     input.close();
     return instrucQueue;
 }
@@ -203,14 +216,16 @@ void Assembler::processAsmFile(std::vector<std::string> & queue){
     Assembler::processInstrucQueue(queue);
     Assembler::output.open(this->outputDir, std::ios::app); 
     for(auto p : queue)
-        Assembler::output << std::setw(4) << std::setfill('0') << std::hex << std::bitset<16>(p).to_ulong() << std::endl;
+        Assembler::output << std::setw(4) << std::setfill('0')  << std::bitset<16>(p) << std::setfill(' ') << "\t\t\t\t"  << "0x" << std::setfill('0') << std::setw(4) << std::hex << std::bitset<16>(p).to_ulong()  << std::endl;
     Assembler::output.close();
 }
 
 
 void Assembler::Assemble(){
+   std::vector <std::string>instrucQ, buff;
    while(!this->i_streameofbit){
-        std::vector instrucQ = Assembler::readASMFile();
-        Assembler::processAsmFile(instrucQ);
+        buff = Assembler::readASMFile();
+        instrucQ.insert(instrucQ.end(), buff.begin(), buff.end());
    }
+    Assembler::processAsmFile(instrucQ);
 }

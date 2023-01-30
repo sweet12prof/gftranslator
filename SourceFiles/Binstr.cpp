@@ -1,4 +1,4 @@
-#include "./Binstr.hpp"
+#include "Binstr.hpp"
 
 Binstr::Binstr(const std::string & opcode, const int & lineNum, const int & Ra, const int & immediate)
     :Instruction::Instruction(opcode, lineNum)

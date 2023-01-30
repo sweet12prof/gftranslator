@@ -5,6 +5,8 @@
 #include "./Const.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <iterator>
+#include <algorithm>
 
 #ifndef INSTRUCTION_HPP
 #define INSTRUCTION_HPP

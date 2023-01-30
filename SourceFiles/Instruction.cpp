@@ -29,7 +29,13 @@ instrTypes  Instruction::getType() const {
     return this->type;
 }
 
-void Instruction::setInstruction(const std::string & opcode, const int & lineNum ){
+void Instruction::setInstruction(const std::string & opcode_, const int & lineNum ){
+    
+    std::string opcode = opcode_; 
+    std::transform(opcode.begin(), opcode.end(), opcode.begin(), 
+    [](unsigned char c) {
+        return ::tolower(c);
+     });
     if(auto p = instMap.find(opcode); p == instMap.end())
     {
         std::cout << "Operation mnemonic " << opcode <<  "in " << lineNum << "doesnt exist" << std::endl;

@@ -23,7 +23,7 @@ void Iinstr::setRa(const int & Ra){
 }
 
 void Iinstr::setImmediate(const int & immediate){
-    if((-1 < immediate) && (256 > immediate))
+    if((-128 < immediate) && (127 > immediate))
         this->Immediate = immediate;
     else {
         std::cout << "Syntax Error"; 
