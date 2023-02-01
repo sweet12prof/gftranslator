@@ -10,7 +10,6 @@ ld_s  $5 7($0)
 xor_s $3, $5
 ld_s  $5 8($0)
 xor_s $4, $5
-
 start:  setfx 0x11b
 dupis $5 0x01
 div_s $1, $5
@@ -34,7 +33,6 @@ mvs $10, $12
 addi $12, -1 
 bne_dec $12, notAddKey 
 J addkey
-
 notAddKey: addi $14, -12 
 setstride 4
 jal MixFor1row

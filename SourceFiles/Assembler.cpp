@@ -147,7 +147,7 @@ std::string Assembler::translate(const std::string & instr, const int & LineNum)
 
 
             case instrTypes::M_TYPE:
-                ss >> op >> ra >> rb >> immediate;
+                ss >> op >> ra >>  immediate >> rb;
                 basePtr2 =  new Minstr{op, LineNum, ra, rb, immediate};
                // std::cout << basePtr2->printInstruction();
                 return basePtr2->printInstruction();
@@ -216,7 +216,8 @@ void Assembler::processAsmFile(std::vector<std::string> & queue){
     Assembler::processInstrucQueue(queue);
     Assembler::output.open(this->outputDir, std::ios::app); 
     for(auto p : queue)
-        Assembler::output << std::setw(4) << std::setfill('0')  << std::bitset<16>(p) << std::setfill(' ') << "\t\t\t\t"  << "0x" << std::setfill('0') << std::setw(4) << std::hex << std::bitset<16>(p).to_ulong()  << std::endl;
+        Assembler::output << std::setw(4) << std::setfill('0') << std::hex  << std::bitset<16>(p).to_ulong() << std::endl;
+    //Assembler::output << std::setw(4) << std::setfill('0')  << std::bitset<16>(p) << std::setfill(' ') << "\t\t\t\t"  << "0x" << std::setfill('0') << std::setw(4) << std::hex << std::bitset<16>(p).to_ulong()  << std::endl;
     Assembler::output.close();
 }
 
