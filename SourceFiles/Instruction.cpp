@@ -47,7 +47,7 @@ void Instruction::setInstruction(const std::string & opcode_, const int & lineNu
         Instruction::setType(p->second.first);
     }
 }
-
+ //sticp
 std::string  Instruction::printInstruction() const{
     return std::bitset<::OPCODE_LENGTH>(Instruction::getOpCode()).to_string();
 } 
