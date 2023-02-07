@@ -33,7 +33,7 @@ Minstr & Minstr::setRb(const int & Rb){
 
 
 Minstr & Minstr::setImmediate(const int & immediate){
-     if((0 <= immediate ) && (16 > immediate))
+     if((-8 <= immediate ) && (8 > immediate))
         this->Immediate = immediate;
     else {
         std::cout << "Syntax Error"; 

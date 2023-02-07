@@ -4,6 +4,7 @@ Jinstr::Jinstr(const std::string & opCode, const int & lineNum, const int & imme
     :Instruction(opCode, lineNum)
 {
     int funct = instMap.find(opCode)->second.second.second;
+    std::cout << "opcode is " << opCode << "funct is " << funct << " immediate is " << immediate << std::endl;
     Jinstr::setInstruction(immediate, funct);
 }
 

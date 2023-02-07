@@ -26,24 +26,36 @@ std::string Assembler::processString(const std::string & lineIn){
                 case ':' :
                         std::transform(token.begin(), token.end(), token.begin(), 
                         [](unsigned char c) {
-                            return ::tolower(c);
+                            return std::tolower(c);
                         });
-
+                   // std::cout << "token is: " << token << std::endl;
                     this->labelRefTable.insert(std::make_pair(token, this->lineCount));
                     token = "";
                 break;
 
                 case ' ' :
+                    std::transform(token.begin(), token.end(), token.begin(), 
+                        [](unsigned char c) {
+                            return std::tolower(c);
+                        });
                     output << token.append(" ");
                     token = "";
                 break;
 
                 case '(' :
+                    std::transform(token.begin(), token.end(), token.begin(), 
+                        [](unsigned char c) {
+                            return std::tolower(c);
+                        });
                     output << token.append(" ");
                     token = "";
                 break;
 
                 case ')' :
+                    std::transform(token.begin(), token.end(), token.begin(), 
+                        [](unsigned char c) {
+                            return std::tolower(c);
+                        });
                     output << token.append(" ");
                     token = "";
                 break;
@@ -64,7 +76,12 @@ std::string Assembler::processString(const std::string & lineIn){
                 default: {
                         token += item; 
                         if(i == lineIn.size() - 1)
-                            output << token;    
+                           { 
+                            std::transform(token.begin(), token.end(), token.begin(), [](unsigned char c) {
+                                return std::tolower(c);
+                            });
+                         output << token;    
+                        }
                 }
 
             }
@@ -99,7 +116,11 @@ int Assembler::replaceLabels(const std::string& label_, const int & lineNum){
             throw std::invalid_argument("Syntax Error");
         }
     else 
-        return p->second - lineNum;
+       {   std::cout << "p->second is " << p->second << " linenum is " << lineNum; 
+       
+       return p->second - lineNum;
+       
+       }
 }
 
 
@@ -109,6 +130,11 @@ std::string Assembler::translate(const std::string & instr, const int & LineNum)
     ss.str(instr);
     std::string opCode;
     ss >> opCode;
+
+    std::transform(opCode.begin(), opCode.end(), opCode.begin(), 
+                        [](unsigned char c) {
+                            return ::tolower(c);
+                        });
 
     Instruction *basePtr = new Instruction{opCode, LineNum};
     Instruction *basePtr2; 
@@ -135,7 +161,7 @@ std::string Assembler::translate(const std::string & instr, const int & LineNum)
 
             case instrTypes::B_TYPE:
                 ss >> op >> ra >> immediateLabel;
-                immediate = Assembler::replaceLabels(immediateLabel, LineNum);
+                immediate = Assembler::replaceLabels(immediateLabel, LineNum-1);
                 basePtr2 = new Binstr {op, LineNum, ra, immediate};
                 //std::cout << basePtr2->printInstruction();
                 return basePtr2->printInstruction();
@@ -153,10 +179,10 @@ std::string Assembler::translate(const std::string & instr, const int & LineNum)
                 if(opCode == "j" || opCode == "jal")
                     {
                         ss >> op >> immediateLabel;
-                        immediate = Assembler::replaceLabels(immediateLabel, LineNum);
+                        immediate = Assembler::replaceLabels(immediateLabel, LineNum-1);
                     }
                 else 
-                    ss >> op >> immediate;
+                    {ss >> op >> immediate;}
 
                 basePtr2 = new Jinstr {op, LineNum, immediate};
                // std::cout << basePtr2->printInstruction();
@@ -177,6 +203,9 @@ void Assembler::processInstrucQueue(std::vector<std::string> & Queue){
     for (auto & p : Queue)
             p = Assembler::processString(p);
 
+    // for (auto & p : Queue)
+    //     std::cout << p << std::endl;
+
     for(auto & p : Queue){
         p = Assembler::translate(p, i);
         ++i;
@@ -192,18 +221,15 @@ std::vector <std::string> Assembler::readASMFile() {
     Assembler::input.seekg(this->fileByteCount);
     int maxLinestoRead{0};
    
-   while (std::getline(Assembler::input, instrucLine))
+   while ( maxLinestoRead <20 && std::getline(Assembler::input, instrucLine))
      {  
-        if(maxLinestoRead < 20)  
-        {
             this->i_streameofbit =  Assembler::input.eof();
                 if(instrucLine != "")
                     {
                         instrucQueue.push_back(instrucLine);
                         ++maxLinestoRead; 
                     }
-        }else 
-        break;
+
     }
     this->fileByteCount = Assembler::input.tellg();
     input.close();
