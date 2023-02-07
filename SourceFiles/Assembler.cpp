@@ -1,7 +1,7 @@
 #include "Assembler.hpp"
 
 Assembler::Assembler(const std::string & filedir)
-    :lineCount{0}, fileByteCount{0}, outputDir{"binaries.txt"}, fileDir{filedir}
+    :lineCount{0}, fileByteCount{0}, outputDir{"/home/cnutsukpui/Desktop/Work/GF_ASIP/GF_ASIP.sim/someasm2.txt"}, fileDir{filedir}
 {
     Assembler::input.open(filedir);
     if(!Assembler::input)
@@ -9,11 +9,7 @@ Assembler::Assembler(const std::string & filedir)
             std::cerr << "File doesnot exist at specified directory/Is Invalid/noRead Permissions";
             exit(EXIT_FAILURE);
         }
-    // Assembler::input.seekg(0, std::ios::end );
-    // this->eof_of_file = Assembler::input.tellg();
-    //  Assembler::input.seekg(0, std::ios::beg );
     Assembler::input.close();
-
     Assembler::output.open(this->outputDir);
     Assembler::output.close();
 
@@ -196,15 +192,18 @@ std::vector <std::string> Assembler::readASMFile() {
     Assembler::input.seekg(this->fileByteCount);
     int maxLinestoRead{0};
    
-   while (maxLinestoRead < 20 &&  std::getline(Assembler::input, instrucLine))
+   while (std::getline(Assembler::input, instrucLine))
      {  
-      
-       this->i_streameofbit =  Assembler::input.eof();
-            if(instrucLine != "")
-                {
-                    instrucQueue.push_back(instrucLine);
-                    ++maxLinestoRead; 
-                }
+        if(maxLinestoRead < 20)  
+        {
+            this->i_streameofbit =  Assembler::input.eof();
+                if(instrucLine != "")
+                    {
+                        instrucQueue.push_back(instrucLine);
+                        ++maxLinestoRead; 
+                    }
+        }else 
+        break;
     }
     this->fileByteCount = Assembler::input.tellg();
     input.close();
