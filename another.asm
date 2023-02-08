@@ -11,10 +11,10 @@ STO_S   $5 3($1)
 LBI     $2 4    
 and_s   $3 $0 
 lbi     $3 3    
-addi    $1 4  
+addi    $1 16  
 loop:   ld_s $4 -1($1)    
 ld_s    $5 -4($1)          
-setmvtype 1               
+setmvtype 0               
 mv_s    $6 $2             
 and_s   $6 $3             
 bne     $6 notmultipleof4
