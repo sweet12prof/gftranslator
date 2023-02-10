@@ -1,7 +1,7 @@
 #include "Assembler.hpp"
 
 Assembler::Assembler(const std::string & filedir)
-    :lineCount{0}, fileByteCount{0}, outputDir{"/home/cnutsukpui/Desktop/Work/GF_ASIP/GF_ASIP.sim/someasm2.txt"}, fileDir{filedir}
+    :lineCount{0}, fileByteCount{0}, outputDir{"/home/cnutsukpui/Desktop/Work-Thesis-/GF_ASIP/GF_ASIP.sim/someasm2.txt"}, fileDir{filedir}
 {
     Assembler::input.open(filedir);
     if(!Assembler::input)
@@ -116,7 +116,7 @@ int Assembler::replaceLabels(const std::string& label_, const int & lineNum){
             throw std::invalid_argument("Syntax Error");
         }
     else 
-       {   std::cout << "p->second is " << p->second << " linenum is " << lineNum; 
+       {   //std::cout << "p->second is " << p->second << " linenum is " << lineNum; 
        
        return p->second - lineNum;
        
@@ -182,7 +182,8 @@ std::string Assembler::translate(const std::string & instr, const int & LineNum)
                         immediate = Assembler::replaceLabels(immediateLabel, LineNum-1);
                     }
                 else 
-                    {ss >> op >> immediate;}
+                    {ss >> op >> immediate; //std::cout << "op is " << op << "immediate: " << immediate << std::endl;
+                    }
 
                 basePtr2 = new Jinstr {op, LineNum, immediate};
                // std::cout << basePtr2->printInstruction();
