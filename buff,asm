@@ -101,7 +101,7 @@ beq $7 end                 ; if $7 is 0 we branch to end sincelast word has been
 J loop                     ;if the final count hasnt been reached jump back to Loop
 end: J END_                ; Jump to end
 
-multipleof4: setsrtype 1   ; prep for byte circular shift; sr_aes_top
+multipleof4: setsrtype 0   ; prep for byte circular shift; sr_aes_top
 sr_s $0 $4                 ;$4 is circular shift 1 byte right  
 setfx 0x1b                 ;set irreducible polynomial to 11b 
 inv_s $4                   ; gf inversion
