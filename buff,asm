@@ -123,3 +123,15 @@ beq $7 end                 ;branch to end if it is
 J loop                     ;Jump to loop if it isnt 
 end: J END_                ;Jump to rnf 
 END_: J  END_              ;iterate forever
+
+
+;AES KERNEL STARTS HERE
+lbi $1 56                  ;reset $1 to start of expansion keys 
+lbi $2 232                 ;$2 now points to starting address of Plaintext
+lbi $sp 512                ;$3 as stack pointer
+
+;get aes plaintext
+ld_s $4 0($2)
+ld_s $5 1($2)
+ld_s $6 2($2)
+ld_s $7 3($2)
