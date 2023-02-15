@@ -28,7 +28,7 @@ xor_s $7 $2
 beq $7 endA                 
 J k_loop                      
 endA: J AES               
-multipleof4: setsrtype 1   
+multipleof4: setsrtype 0   
 sr_s $0 $4                   
 setfx 27                  
 dupi_s $7 01
@@ -65,11 +65,44 @@ ld_s $8  0($1)
 ld_s $9  1($1)              
 ld_s $10 2($1)              
 ld_s $11 3($1)              
+setsrtype 3
+sr_s $2 $11
+sr_s $11 $0 
+sr_s $2 $10
+sr_s $10 $0
+sr_s $2 $9
+sr_s $9 $0
+sr_s $2 $8
+sr_s $8 $0
+sr_s $12 $11 
+sr_s $11 $0 
+sr_s $12 $10
+sr_s $10 $0
+sr_s $12 $9
+sr_s $9 $0 
+sr_s $12 $8
+sr_s $8 $0 
+sr_s $13 $11 
+sr_s $11 $0 
+sr_s $13 $10
+sr_s $10 $0
+sr_s $13 $9
+sr_s $9 $0 
+sr_s $13 $8
+sr_s $8 $0 
+sr_s $14 $11 
+sr_s $11 $0 
+sr_s $14 $10
+sr_s $10 $0
+sr_s $14 $9
+sr_s $9 $0 
+sr_s $14 $8
+sr_s $8 $0 
 addi $1 16                  
-xor_s $4 $8                                   
-xor_s $5 $9                   
-xor_s $6 $10                
-xor_s $7 $11                
+xor_s $4 $14                                   
+xor_s $5 $13                
+xor_s $6 $12              
+xor_s $7 $2            
 lbi $8 0                    
 Loop: setfx 27              
         dupi_s $9 01         
@@ -93,7 +126,7 @@ Loop: setfx 27
         setsrtype 1         
         sr_s $6 $7          
         addi  $8 1          
-        lbi   $10 9          
+        lbi   $10 10          
         xor_s $10 $8        
         bne $10 MixColumn   
         J AddKey                
@@ -133,17 +166,57 @@ AddKey: ld_s $9  0($1)
         ld_s $10 1($1)  
         ld_s $11 2($1)  
         ld_s $12 3($1)  
-        xor_s $4 $9                          
-        xor_s $5 $10               
-        xor_s $6 $11              
-        xor_s $7 $12              
+        addi $3 -4
+        sto_s  $8  0($3)
+        sto_s  $1  1($3)
+        setsrtype 3 
+        sr_s $2 $12 
+        sr_s $12 $0 
+        sr_s $2 $11
+        sr_s $11 $0
+        sr_s $2 $10
+        sr_s $10 $0 
+        sr_s $2 $9
+        sr_s $9 $0 
+        sr_s $1 $12 
+        sr_s $12 $0 
+        sr_s $1 $11
+        sr_s $11 $0
+        sr_s $1 $10
+        sr_s $10 $0 
+        sr_s $1 $9
+        sr_s $9 $0 
+        sr_s $8 $12 
+        sr_s $12 $0 
+        sr_s $8 $11
+        sr_s $11 $0
+        sr_s $8 $10
+        sr_s $10 $0 
+        sr_s $8 $9
+        sr_s $9 $0 
+        sr_s $13 $12 
+        sr_s $12 $0 
+        sr_s $13 $11
+        sr_s $11 $0
+        sr_s $13 $10
+        sr_s $10 $0 
+        sr_s $13 $9
+        sr_s $9 $0 
+        xor_s $4 $13              
+        xor_s $5 $8           
+        xor_s $6 $1        
+        xor_s $7 $2   
+        ld_s  $1 1($3)
+        ld_s  $8 0($3) 
+        addi  $3 4                  
         addi  $1 16            
-        lbi   $10 9              
+        lbi   $10 10              
         xor_s $10 $8             
         bne $10 notEnd          
         J END                   
         notEnd: J Loop          
-Mix1Row: dupi_s $9 03          
+Mix1Row: setfx 27
+    dupi_s $9 03          
     dupi_s $8 02               
     mul_s $5 $9                
     mul_s $4 $8                

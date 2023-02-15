@@ -18,15 +18,67 @@ ld_s $7 3($2)              ;$7 = MEM[12+$2]
 
 ;perform initial addRoundKey
 ld_s $8  0($1)              ;get first word of first Roundkey
-ld_s $9  1($1)              ;get 2ndword
+ld_s $9  1($1)              ;get 2nd word
 ld_s $10 2($1)              ; get 3 word
 ld_s $11 3($1)              ;get word 4
 
+
+setsrtype 3
+
+sr_s $2 $11
+sr_s $11 $0 
+
+sr_s $2 $10
+sr_s $10 $0
+
+sr_s $2 $9
+sr_s $9 $0
+
+sr_s $2 $8
+sr_s $8 $0
+
+sr_s $12 $11 
+sr_s $11 $0 
+
+sr_s $12 $10
+sr_s $10 $0
+
+sr_s $12 $9
+sr_s $9 $0 
+
+sr_s $12 $8
+sr_s $8 $0 
+
+sr_s $13 $11 
+sr_s $11 $0 
+
+sr_s $13 $10
+sr_s $10 $0
+
+sr_s $13 $9
+sr_s $9 $0 
+
+sr_s $13 $8
+sr_s $8 $0 
+
+sr_s $14 $11 
+sr_s $11 $0 
+
+sr_s $14 $10
+sr_s $10 $0
+
+sr_s $14 $9
+sr_s $9 $0 
+
+sr_s $14 $8
+sr_s $8 $0 
+
+
 addi $1 16                  ;increment keyPointer to nextRound
-xor_s $4 $8                 ;perform addRoundKey(Initial)                  
-xor_s $5 $9                 ;perform addRoundKey(Initial)  
-xor_s $6 $10                ;perform addRoundKey(Initial)
-xor_s $7 $11                ;perform addRoundKey(Initial)
+xor_s $4 $2                 ;perform addRoundKey(Initial)                  
+xor_s $5 $12                 ;perform addRoundKey(Initial)  
+xor_s $6 $13                ;perform addRoundKey(Initial)
+xor_s $7 $14                ;perform addRoundKey(Initial)
 
 
 ;set iteration count
@@ -112,10 +164,68 @@ AddKey: ld_s $9  0($1)         ;get first word of next Roundkey
         ld_s $11 2($1)         ;get 3 word
         ld_s $12 3($1)         ;get word 4
 
-        xor_s $4 $9            ;perform add RoundKey           
-        xor_s $5 $10           ;perform add RoundKey 
-        xor_s $6 $11           ;perform add RoundKey
-        xor_s $7 $12           ;perform add RoundKey
+        addi $3 -4
+        sto  $8  0($3)
+        sto  $1  1($3)
+
+        setsrtype 3 
+
+
+        sr_s $2 $12 
+        sr_s $12 $0 
+
+        sr_s $2 $11
+        sr_s $11 $0
+
+        sr_s $2 $10
+        sr_s $10 $0 
+
+        sr_s $2 $9
+        sr_s $9 $0 
+
+        sr_s $1 $12 
+        sr_s $12 $0 
+
+        sr_s $1 $11
+        sr_s $11 $0
+
+        sr_s $1 $10
+        sr_s $10 $0 
+
+        sr_s $1 $9
+        sr_s $9 $0 
+
+        sr_s $8 $12 
+        sr_s $12 $0 
+
+        sr_s $8 $11
+        sr_s $11 $0
+
+        sr_s $8 $10
+        sr_s $10 $0 
+
+        sr_s $8 $9
+        sr_s $9 $0 
+
+        sr_s $13 $12 
+        sr_s $12 $0 
+
+        sr_s $13 $11
+        sr_s $11 $0
+
+        sr_s $13 $10
+        sr_s $10 $0 
+
+        sr_s $13 $9
+        sr_s $9 $0 
+
+        xor_s $5 $1            ;perform add RoundKey 
+        ld_s  $1 1($3)
+        xor_s $6 $8            ;perform add RoundKey
+        ld_s  $8 0($3) 
+        xor_s $4 $2            ;perform add RoundKey           
+        xor_s $7 $13           ;perform add RoundKey
+        addi  $3 4
         addi  $1 16            ; point $1 to start of next key 
     
 

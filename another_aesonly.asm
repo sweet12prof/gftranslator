@@ -13,12 +13,45 @@ ld_s $7 3($2)
 ld_s $8  0($1)              
 ld_s $9  1($1)              
 ld_s $10 2($1)              
-ld_s $11 3($1)              
+ld_s $11 3($1)   
+setsrtype 3
+sr_s $2 $11
+sr_s $11 $0 
+sr_s $2 $10
+sr_s $10 $0
+sr_s $2 $9
+sr_s $9 $0
+sr_s $2 $8
+sr_s $8 $0
+sr_s $12 $11 
+sr_s $11 $0 
+sr_s $12 $10
+sr_s $10 $0
+sr_s $12 $9
+sr_s $9 $0 
+sr_s $12 $8
+sr_s $8 $0 
+sr_s $13 $11 
+sr_s $11 $0 
+sr_s $13 $10
+sr_s $10 $0
+sr_s $13 $9
+sr_s $9 $0 
+sr_s $13 $8
+sr_s $8 $0 
+sr_s $14 $11 
+sr_s $11 $0 
+sr_s $14 $10
+sr_s $10 $0
+sr_s $14 $9
+sr_s $9 $0 
+sr_s $14 $8
+sr_s $8 $0 
 addi $1 16                  
-xor_s $4 $8                                   
-xor_s $5 $9                   
-xor_s $6 $10                
-xor_s $7 $11                
+xor_s $4 $2                                   
+xor_s $5 $12                   
+xor_s $6 $13                
+xor_s $7 $14                
 lbi $8 0                    
 Loop: setfx 27              
         dupi_s $9 01         
@@ -82,10 +115,49 @@ AddKey: ld_s $9  0($1)
         ld_s $10 1($1)  
         ld_s $11 2($1)  
         ld_s $12 3($1)  
-        xor_s $4 $9                          
-        xor_s $5 $10               
-        xor_s $6 $11              
-        xor_s $7 $12              
+        addi $3 -4
+        sto  $8  0($3)
+        sto  $1  1($3)
+        setsrtype 3 
+        sr_s $2 $12 
+        sr_s $12 $0 
+        sr_s $2 $11
+        sr_s $11 $0
+        sr_s $2 $10
+        sr_s $10 $0 
+        sr_s $2 $9
+        sr_s $9 $0 
+        sr_s $1 $12 
+        sr_s $12 $0 
+        sr_s $1 $11
+        sr_s $11 $0
+        sr_s $1 $10
+        sr_s $10 $0 
+        sr_s $1 $9
+        sr_s $9 $0 
+        sr_s $8 $12 
+        sr_s $12 $0 
+        sr_s $8 $11
+        sr_s $11 $0
+        sr_s $8 $10
+        sr_s $10 $0 
+        sr_s $8 $9
+        sr_s $9 $0 
+        sr_s $13 $12 
+        sr_s $12 $0 
+        sr_s $13 $11
+        sr_s $11 $0
+        sr_s $13 $10
+        sr_s $10 $0 
+        sr_s $13 $9
+        sr_s $9 $0 
+        xor_s $5 $1             
+        ld_s  $1 1($3)
+        xor_s $6 $8             
+        ld_s  $8 0($3) 
+        xor_s $4 $2                 
+        xor_s $7 $13           
+        addi  $3 4            
         addi  $1 16            
         lbi   $10 9              
         xor_s $10 $8             

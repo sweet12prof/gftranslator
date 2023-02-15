@@ -19,7 +19,7 @@ int main(){
 
 //    Instruction *RinstrPtr{& newInstr};
 //    std::cout << std::hex << std::bitset<16>(RinstrPtr->printInstruction()).to_ulong();
-    std::string someStr {"/home/cnutsukpui/Desktop/gftranslator/another.asm"};
+    std::string someStr {"../another.asm"};
     Assembler ass{someStr};
 
     // std::string someStr {"something: j something"};

@@ -1,7 +1,7 @@
 #include "Assembler.hpp"
 
 Assembler::Assembler(const std::string & filedir)
-    :lineCount{0}, fileByteCount{0}, outputDir{"/home/cnutsukpui/Desktop/Work-Thesis-/GF_ASIP/GF_ASIP.sim/someasm2.txt"}, fileDir{filedir}
+    :lineCount{0}, fileByteCount{0}, outputDir{"someasm2.txt"}, fileDir{filedir}
 {
     Assembler::input.open(filedir);
     if(!Assembler::input)
