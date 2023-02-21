@@ -14,7 +14,7 @@
 
 class Assembler {
     public: 
-        Assembler (const std::string &);
+        Assembler (const std::string &, const std::string &);
 
         // parse a string removing labels and extra white space
         std::string processString(const std::string &);

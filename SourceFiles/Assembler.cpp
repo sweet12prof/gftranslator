@@ -1,9 +1,9 @@
 #include "Assembler.hpp"
 
-Assembler::Assembler(const std::string & filedir)
-    :lineCount{0}, fileByteCount{0}, outputDir{"/home/cnutsukpui/Desktop/Work-Thesis-/GF_ASIP/GF_ASIP.sim/someasm2.txt"}, fileDir{filedir}
+Assembler::Assembler(const std::string & infiledir, const std::string & outFileDir)
+    :lineCount{0}, fileByteCount{0}, outputDir{outFileDir}, fileDir{infiledir}
 {
-    Assembler::input.open(filedir);
+    Assembler::input.open(infiledir);
     if(!Assembler::input)
         {
             std::cerr << "File doesnot exist at specified directory/Is Invalid/noRead Permissions";
