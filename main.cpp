@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]){
    std::string inputfilePath{argv[1]};
    std::string outputfilePath{argv[2]};
-   outputfilePath += "output.txt";
+   outputfilePath += "someasm2.txt";
     Assembler ass{inputfilePath, outputfilePath};
     ass.Assemble();
 }

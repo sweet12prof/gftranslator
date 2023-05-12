@@ -52,15 +52,7 @@ J loop
 end1: J END_                  
 END_: J  END_               
 
-
-
-
-
-
-//rewrite
-
 .data
-
 .text
 lbi     $1  56     ;gen_KEYS STARTS FROM MEM[16]
 lbi     $11 16    ;rcon  
